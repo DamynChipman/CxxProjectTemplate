@@ -1,5 +1,5 @@
 # CMake Version
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.16)
 
 # Set the CXX standard to C++11
 set(CMAKE_CXX_STANDARD 11)
