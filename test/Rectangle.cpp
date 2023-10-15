@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "utils/Rectangle.h"
+#include "Rectangle.hpp"
 
 TEST(Rectangle, check_area) {
     double w = 1.0;

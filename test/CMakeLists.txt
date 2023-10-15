@@ -1,18 +1,30 @@
-include_directories("${PROJECT_SOURCE_DIR}/include")
+# Use CTest
+include(CTest)
 
-file(GLOB sources "${PROJECT_SOURCE_DIR}/src/utils/*.cpp")
-list(REMOVE_ITEM sources "${PROJECT_SOURCE_DIR}/src/main.c")
+# Use FetchContent (to get GoogleTest)
+include(FetchContent)
+FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG release-1.12.1
+)
+FetchContent_MakeAvailable(googletest)
 
-file(GLOB tests "${PROJECT_SOURCE_DIR}/test/*.cpp")
-list(REMOVE_ITEM tests "${PROJECT_SOURCE_DIR}/test/main.cpp")
+# Use GoogleTest
+include(GoogleTest)
 
+# Set tests from .cpp files in testing directory
+file(GLOB tests "./*.cpp")
+
+# Remove GoogleTest main executable from tests
+list(REMOVE_ITEM tests "./main.cpp")
+
+# Iterate over test files and run them
 foreach(file ${tests})
-  set(name)
-  get_filename_component(name ${file} NAME_WE)
-  add_executable("${name}_tests"
-    ${sources}
-    ${file}
-    "${PROJECT_SOURCE_DIR}/test/main.cpp")
-  target_link_libraries("${name}_tests" gtest_main)
-  add_test(NAME ${name} COMMAND "${name}_tests")
+	set(name)
+	get_filename_component(name ${file} NAME_WE)
+	add_executable("${name}_tests" ${file} "./main.cpp")
+    target_include_directories("${name}_tests" PUBLIC ${PROJECT_SOURCE_DIR}/include)
+	target_link_libraries("${name}_tests" PUBLIC shapes gtest_main)
+	gtest_discover_tests("${name}_tests")
 endforeach()
