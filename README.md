@@ -2,7 +2,7 @@
 
 ## Made for C++ Projects Building with CMake and Testing with GoogleTest
 
-## Author: Damyn Chipman aka [camperD](https://github.com/camperD)
+## Author: [Damyn Chipman](https://github.com/DamynChipman)
 
 ---
 
@@ -12,15 +12,16 @@ This template demonstrates pitchfork project layout. It uses the Google Test Fra
 
 ## Install
 
-To install, clone or fork this repo.
+To install, clone or fork this repo:
+
+```bash
+git clone https://github.com/DamynChipman/CxxProjectTemplate
+```
 
 Building is done with CMake:
 
 ```bash
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make
+cmake -S . -B build
 ```
 
 ## Test
@@ -28,5 +29,5 @@ $ make
 Once built, from the build directory, run:
 
 ```bash
-$ make test
+make test
 ```
